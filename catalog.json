@@ -9,20 +9,22 @@
       {
         "key": "quality",
         "label": "Audio Quality",
-        "type": "select",
+        "field_type": {
+          "type": "select",
+          "options": [
+            { "value": "27", "label": "Hi-Res (24-bit, 192kHz)" },
+            { "value": "7", "label": "Hi-Res (24-bit, 96kHz)" },
+            { "value": "6", "label": "Lossless (16-bit, 44.1kHz)" },
+            { "value": "5", "label": "High (MP3 320kbps)" }
+          ]
+        },
         "required": false,
-        "help_text": "Default: Lossless",
-        "options": [
-          { "value": "27", "label": "Hi-Res (24-bit, 192kHz)" },
-          { "value": "7", "label": "Hi-Res (24-bit, 96kHz)" },
-          { "value": "6", "label": "Lossless (16-bit, 44.1kHz)" },
-          { "value": "5", "label": "High (MP3 320kbps)" }
-        ]
+        "help_text": "Default: Lossless"
       },
       {
         "key": "country",
         "label": "Country Code",
-        "type": "string",
+        "field_type": { "type": "string" },
         "required": false,
         "help_text": "Two-letter country code. Default: US"
       }
@@ -40,28 +42,32 @@
       {
         "key": "quality",
         "label": "Audio Quality",
-        "type": "select",
+        "field_type": {
+          "type": "select",
+          "options": [
+            { "value": "HI_RES_LOSSLESS", "label": "Hi-Res (24-bit, up to 192kHz)" },
+            { "value": "LOSSLESS", "label": "Lossless (16-bit, 44.1kHz)" },
+            { "value": "HIGH", "label": "High (AAC 320kbps)" },
+            { "value": "LOW", "label": "Low (AAC 96kbps)" }
+          ]
+        },
         "required": false,
-        "help_text": "Default: Lossless",
-        "options": [
-          { "value": "HI_RES_LOSSLESS", "label": "Hi-Res (24-bit, up to 192kHz)" },
-          { "value": "LOSSLESS", "label": "Lossless (16-bit, 44.1kHz)" },
-          { "value": "HIGH", "label": "High (AAC 320kbps)" },
-          { "value": "LOW", "label": "Low (AAC 96kbps)" }
-        ]
+        "help_text": "Default: Lossless"
       },
       {
         "key": "instance_timeout",
         "label": "Instance Timeout",
-        "type": "select",
+        "field_type": {
+          "type": "select",
+          "options": [
+            { "value": "3", "label": "3 seconds" },
+            { "value": "5", "label": "5 seconds" },
+            { "value": "10", "label": "10 seconds" },
+            { "value": "15", "label": "15 seconds" }
+          ]
+        },
         "required": false,
-        "help_text": "Default: 5 seconds",
-        "options": [
-          { "value": "3", "label": "3 seconds" },
-          { "value": "5", "label": "5 seconds" },
-          { "value": "10", "label": "10 seconds" },
-          { "value": "15", "label": "15 seconds" }
-        ]
+        "help_text": "Default: 5 seconds"
       }
     ],
     "wasm_url": "https://github.com/alexmaslar/riff-plugin-tidal/releases/latest/download/plugin.wasm",
