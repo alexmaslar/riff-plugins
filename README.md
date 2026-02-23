@@ -43,5 +43,5 @@ Riff servers fetch this catalog on startup and every 6 hours, making community p
 
 | Plugin | Author | Capabilities |
 |---|---|---|
-| Qobuz | riff | Streaming |
+| [Qobuz](https://github.com/alexmaslar/riff-plugin-qobuz) | riff | Streaming |
 | [Tidal](https://github.com/alexmaslar/riff-plugin-tidal) | riff | Streaming |
