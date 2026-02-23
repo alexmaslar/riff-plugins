@@ -6,7 +6,7 @@ Riff servers fetch this catalog on startup and every 6 hours, making community p
 
 ## Submitting a Plugin
 
-1. Build your plugin as a WASM binary with a `manifest.json` (see [plugin docs](https://github.com/alexmaslar/riff/blob/main/docs/PLUGINS.md))
+1. Build your plugin as a WASM binary with a `manifest.json` (see [Plugin Development Guide](PLUGINS.md))
 2. Publish releases to your own GitHub repo
 3. Fork this repo and add an entry to `catalog.json`
 4. Open a PR
