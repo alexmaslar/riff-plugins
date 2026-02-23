@@ -1,5 +1,36 @@
 [
   {
+    "name": "qobuz",
+    "display_name": "Qobuz",
+    "description": "Stream hi-res audio from Qobuz via SquidWTF proxy.",
+    "author": "riff",
+    "capabilities": ["streaming"],
+    "settings": [
+      {
+        "key": "quality",
+        "label": "Audio Quality",
+        "type": "select",
+        "required": false,
+        "help_text": "Default: Lossless",
+        "options": [
+          { "value": "27", "label": "Hi-Res (24-bit, 192kHz)" },
+          { "value": "7", "label": "Hi-Res (24-bit, 96kHz)" },
+          { "value": "6", "label": "Lossless (16-bit, 44.1kHz)" },
+          { "value": "5", "label": "High (MP3 320kbps)" }
+        ]
+      },
+      {
+        "key": "country",
+        "label": "Country Code",
+        "type": "string",
+        "required": false,
+        "help_text": "Two-letter country code. Default: US"
+      }
+    ],
+    "wasm_url": "",
+    "manifest_url": ""
+  },
+  {
     "name": "tidal",
     "display_name": "Tidal",
     "description": "Stream lossless audio from Tidal via community proxies.",
