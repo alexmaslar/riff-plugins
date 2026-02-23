@@ -1,0 +1,39 @@
+[
+  {
+    "name": "tidal",
+    "display_name": "Tidal",
+    "description": "Stream lossless audio from Tidal via community proxies.",
+    "author": "riff",
+    "capabilities": ["streaming"],
+    "settings": [
+      {
+        "key": "quality",
+        "label": "Audio Quality",
+        "type": "select",
+        "required": false,
+        "help_text": "Default: Lossless",
+        "options": [
+          { "value": "HI_RES_LOSSLESS", "label": "Hi-Res (24-bit, up to 192kHz)" },
+          { "value": "LOSSLESS", "label": "Lossless (16-bit, 44.1kHz)" },
+          { "value": "HIGH", "label": "High (AAC 320kbps)" },
+          { "value": "LOW", "label": "Low (AAC 96kbps)" }
+        ]
+      },
+      {
+        "key": "instance_timeout",
+        "label": "Instance Timeout",
+        "type": "select",
+        "required": false,
+        "help_text": "Default: 5 seconds",
+        "options": [
+          { "value": "3", "label": "3 seconds" },
+          { "value": "5", "label": "5 seconds" },
+          { "value": "10", "label": "10 seconds" },
+          { "value": "15", "label": "15 seconds" }
+        ]
+      }
+    ],
+    "wasm_url": "https://github.com/alexmaslar/riff-plugin-tidal/releases/latest/download/plugin.wasm",
+    "manifest_url": "https://github.com/alexmaslar/riff-plugin-tidal/releases/latest/download/manifest.json"
+  }
+]
