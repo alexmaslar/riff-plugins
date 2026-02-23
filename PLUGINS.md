@@ -742,7 +742,89 @@ Note: Cargo uses underscores in the output filename (e.g., `riff_plugin_tidal.wa
 
 ## Testing
 
-### Manual Testing
+### Dev Plugin Mode (Recommended)
+
+The fastest way to test during development. Point the server at your local build directory — no copying files, no faking catalog entries, no restarts.
+
+**1. Add a `dev_plugins` entry to `config.yaml`:**
+
+```yaml
+dev_plugins:
+  myplugin:
+    path: /path/to/riff-plugin-myplugin   # directory with plugin.wasm + manifest.json
+
+plugins:
+  myplugin:
+    enabled: true
+    api_key: "your-key"
+    quality: "LOSSLESS"
+```
+
+The `dev_plugins` section maps a plugin name to a local directory containing `plugin.wasm` and `manifest.json`. Plugin settings (enabled, credentials, quality) go in the normal `plugins` section.
+
+**2. Build your plugin:**
+
+```bash
+cargo build --release --target wasm32-unknown-unknown
+cp target/wasm32-unknown-unknown/release/riff_plugin_myplugin.wasm plugin.wasm
+```
+
+**3. Start the server.** Look for:
+
+```
+loaded dev plugin: myplugin (from /path/to/riff-plugin-myplugin)
+```
+
+**4. Test with curl:**
+
+```bash
+# Search (admin only — dev plugins are hidden from non-admin users)
+curl -H "Authorization: Bearer $TOKEN" \
+  "http://localhost:8080/streaming/search?q=radiohead&limit=5"
+
+# Album detail
+curl -H "Authorization: Bearer $TOKEN" \
+  "http://localhost:8080/streaming/albums/myplugin/ALBUM_ID"
+
+# Health / status
+curl -H "Authorization: Bearer $TOKEN" http://localhost:8080/plugins/status
+
+# Catalog (dev plugins show "dev": true)
+curl -H "Authorization: Bearer $TOKEN" http://localhost:8080/plugins/catalog
+```
+
+**5. Rebuild and reload without restarting:**
+
+After changing your plugin code, rebuild the WASM and reload:
+
+```bash
+cargo build --release --target wasm32-unknown-unknown
+cp target/wasm32-unknown-unknown/release/riff_plugin_myplugin.wasm plugin.wasm
+
+curl -X POST -H "Authorization: Bearer $TOKEN" \
+  http://localhost:8080/plugins/myplugin/reload
+```
+
+The reload endpoint re-reads `plugin.wasm` and `manifest.json` from the dev path and hot-swaps the plugin in the registry. No server restart needed.
+
+**6. iOS app:** Admin users see dev plugins with a "DEV" badge in Plugin Settings. The plugin detail screen has a "Reload Plugin" button for one-tap reloading after a rebuild.
+
+#### Dev Plugin Visibility
+
+Dev plugins are isolated from non-admin users:
+
+| Endpoint | Non-admin | Admin |
+|---|---|---|
+| `GET /streaming/search` | Dev plugins excluded | All plugins included |
+| `GET /streaming/albums/{provider}/{id}` | 404 for dev providers | Works normally |
+| `GET /streaming/artists/{provider}/{id}/albums` | 404 for dev providers | Works normally |
+| `GET /streaming/tracks/{provider}/{id}/stream` | 404 for dev providers | Works normally |
+| `GET /plugins/catalog` | Dev plugins hidden | Shown with `"dev": true` |
+| `GET /plugins/status` | Dev plugins hidden | Shown with `"dev": true` |
+
+This lets you test a dev plugin on a shared server without exposing incomplete functionality to other users.
+
+### Manual Testing (Without Dev Mode)
 
 1. Build the WASM plugin.
 2. Copy `plugin.wasm` and `manifest.json` to the server's plugin directory:
