@@ -34,7 +34,7 @@ Riff servers fetch this catalog on startup and every 6 hours, making community p
 | `display_name` | Human-readable name shown in the UI |
 | `description` | One-line description |
 | `author` | GitHub username or org |
-| `capabilities` | Array of: `streaming`, `lyrics`, `scrobble`, `metadata` |
+| `capabilities` | Array of: `streaming`, `editorial`, `lyrics`, `scrobble`, `metadata` |
 | `settings` | Array of setting field objects (passed through to the UI as-is) |
 | `wasm_url` | Direct download URL for `plugin.wasm` |
 | `manifest_url` | Direct download URL for `manifest.json` |
@@ -45,3 +45,4 @@ Riff servers fetch this catalog on startup and every 6 hours, making community p
 |---|---|---|
 | [Qobuz](https://github.com/alexmaslar/riff-plugin-qobuz) | riff | Streaming |
 | [Tidal](https://github.com/alexmaslar/riff-plugin-tidal) | riff | Streaming |
+| [Pitchfork](https://github.com/alexmaslar/riff-plugin-pitchfork) | riff | Editorial |

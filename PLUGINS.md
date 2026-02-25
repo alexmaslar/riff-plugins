@@ -10,6 +10,7 @@ Riff uses a WebAssembly (WASM) plugin system powered by [Extism](https://extism.
 - [Manifest Reference](#manifest-reference)
 - [Plugin Capabilities](#plugin-capabilities)
   - [Streaming](#streaming)
+  - [Editorial](#editorial)
   - [Lyrics](#lyrics)
   - [Scrobble](#scrobble)
   - [Metadata](#metadata)
@@ -259,7 +260,7 @@ let value = config::get("quality")?.unwrap_or_else(|| "default".to_string());
 
 ## Plugin Capabilities
 
-Riff supports four capability types. Each requires a different set of exported functions.
+Riff supports five capability types. Each requires a different set of exported functions.
 
 ### Streaming
 
@@ -283,6 +284,47 @@ The most common plugin type. Provides search, album/artist browsing, and audio s
 4. `GET /streaming/tracks/{provider}/{id}/stream?quality=...` → server calls `riff_get_stream_url`, then **proxies** the audio from the CDN URL back to the client, forwarding `Range` headers for seeking support.
 
 **Quality enum values sent by the server:** `hires`, `lossless`, `high`, `low` (defaults to `lossless` if omitted).
+
+### Editorial
+
+Provides album reviews and ratings from external publications.
+
+**Required exports:**
+
+| Function | Input | Output | Description |
+|---|---|---|---|
+| `riff_get_album_reviews` | `AlbumReviewInput` | `EditorialResult` | Fetch reviews for an album |
+| `riff_health_check` | `String` (ignored) | `String` | Verify the service is reachable |
+
+```rust
+// AlbumReviewInput
+struct AlbumReviewInput {
+    title: String,
+    artist: String,
+    year: Option<i32>,
+}
+
+// EditorialResult
+struct EditorialResult {
+    reviews: Vec<EditorialReview>,
+}
+
+struct EditorialReview {
+    source: String,
+    source_url: String,
+    excerpt: Option<String>,
+    rating: Option<f64>,
+    rating_count: Option<u32>,
+    reviewer: Option<String>,
+    review_date: Option<String>,
+}
+```
+
+**Server-side flow:**
+
+During the background editorial enrichment stage, the server calls `riff_get_album_reviews` on all registered editorial plugins concurrently for each album, then stores the returned reviews in the database.
+
+**Example:** See [`riff-plugin-pitchfork`](https://github.com/alexmaslar/riff-plugin-pitchfork) — scrapes Pitchfork for album reviews, ratings, and reviewer attribution.
 
 ### Lyrics
 
@@ -998,6 +1040,14 @@ Plugins are stored at:
 ---
 
 ## Reference Implementations
+
+### Pitchfork Plugin (Editorial)
+
+[`riff-plugin-pitchfork`](https://github.com/alexmaslar/riff-plugin-pitchfork) — Demonstrates:
+- Editorial capability (album reviews and ratings)
+- HTML scraping with Extism HTTP (no JSON API)
+- JSON-LD and `__PRELOADED_STATE__` parsing
+- Minimal dependencies (no base64 or auth needed)
 
 ### Tidal Plugin (Simple with Failover)
 

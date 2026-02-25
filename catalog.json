@@ -72,5 +72,15 @@
     ],
     "wasm_url": "https://github.com/alexmaslar/riff-plugin-tidal/releases/latest/download/plugin.wasm",
     "manifest_url": "https://github.com/alexmaslar/riff-plugin-tidal/releases/latest/download/manifest.json"
+  },
+  {
+    "name": "pitchfork",
+    "display_name": "Pitchfork",
+    "description": "Album reviews and ratings from Pitchfork.",
+    "author": "riff",
+    "capabilities": ["editorial"],
+    "settings": [],
+    "wasm_url": "https://github.com/alexmaslar/riff-plugin-pitchfork/releases/latest/download/plugin.wasm",
+    "manifest_url": "https://github.com/alexmaslar/riff-plugin-pitchfork/releases/latest/download/manifest.json"
   }
 ]
