@@ -80,7 +80,17 @@
     "author": "riff",
     "capabilities": ["editorial"],
     "settings": [],
-    "wasm_url": "https://github.com/alexmaslar/riff-plugin-pitchfork/releases/latest/download/plugin.wasm",
-    "manifest_url": "https://github.com/alexmaslar/riff-plugin-pitchfork/releases/latest/download/manifest.json"
+    "wasm_url": "https://github.com/alexmaslar/riff-plugin-editorial/releases/latest/download/pitchfork-plugin.wasm",
+    "manifest_url": "https://github.com/alexmaslar/riff-plugin-editorial/releases/latest/download/pitchfork-manifest.json"
+  },
+  {
+    "name": "allmusic",
+    "display_name": "AllMusic",
+    "description": "Album ratings from AllMusic.",
+    "author": "riff",
+    "capabilities": ["editorial"],
+    "settings": [],
+    "wasm_url": "https://github.com/alexmaslar/riff-plugin-editorial/releases/latest/download/allmusic-plugin.wasm",
+    "manifest_url": "https://github.com/alexmaslar/riff-plugin-editorial/releases/latest/download/allmusic-manifest.json"
   }
 ]
