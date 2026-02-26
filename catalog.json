@@ -92,5 +92,15 @@
     "settings": [],
     "wasm_url": "https://github.com/alexmaslar/riff-plugin-editorial/releases/latest/download/allmusic-plugin.wasm",
     "manifest_url": "https://github.com/alexmaslar/riff-plugin-editorial/releases/latest/download/allmusic-manifest.json"
+  },
+  {
+    "name": "northern-transmissions",
+    "display_name": "Northern Transmissions",
+    "description": "Album reviews and ratings from Northern Transmissions.",
+    "author": "riff",
+    "capabilities": ["editorial"],
+    "settings": [],
+    "wasm_url": "https://github.com/alexmaslar/riff-plugin-editorial/releases/latest/download/northern-transmissions-plugin.wasm",
+    "manifest_url": "https://github.com/alexmaslar/riff-plugin-editorial/releases/latest/download/northern-transmissions-manifest.json"
   }
 ]
